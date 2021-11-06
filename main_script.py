@@ -4,12 +4,24 @@ import re
 import lxml
 import json
 import urllib.request
+import urllib.request
 from bs4 import BeautifulSoup
 import datetime
 import os
 import time
 import getpass
-import alpha
+
+# open a connection to a URL using urllib
+webUrl  = urllib.request.urlopen('https://www.enally.in/author.txt')
+
+image_url_test  = urllib.request.urlopen('https://www.enally.in/author.txt')
+
+#get the result code and print it
+#print ("result code: " + str(webUrl.getcode()))
+
+# read the data from the URL and print it
+data = webUrl.read()
+#print (data)
 
 
 #----- Global Variable -----#
@@ -17,6 +29,7 @@ x = datetime.datetime.now()
 FOLDER = 'images/'
 totalFiles = 0
 totalDir = 0
+
 for base, dirs, files in os.walk(FOLDER):
     #print('Searching in : ',base)
     for directories in dirs:
@@ -36,7 +49,7 @@ with open(r"med_images.txt", 'r') as fp:
 total_to_download = count + 1
 
 total_images = totalDir + totalFiles
-time.sleep(1)
+#time.sleep(1)
 print("\nTotal No of Remaining files:",total_to_download - total_images )
 print("Total Number of downloads:", total_images)
 
@@ -48,9 +61,14 @@ items = myline
 print("\nSearching for: ",items)
 
 
+####---- Image folder and More Naming
 folder = "images/"
-image_name = total_images
-#item_name = "paracetamol"
+count_total_image = total_images # Count total image to increment name by +1
+image_id = 158630  # if want to add number with text
+name_prefix = "EMD"
+name_suffix = image_id + (count_total_image+1)
+
+# Final Name will be {name_prefix + name_suffix}
 
 
 start = timer()
@@ -128,7 +146,7 @@ def get_images_data():
     print('\nImage Link:')  # in order
     for index in range(0, 1):
         for index, fixed_full_res_image in enumerate(matched_google_full_resolution_images):
-
+            
             # -Link 7
             original_size_img_not_fixed = bytes( fixed_full_res_image, 'ascii').decode('unicode-escape')
 
@@ -140,6 +158,7 @@ def get_images_data():
                 # Printing Downloadable "Full Resolution Images" Links
                 print(original_size_img)
 
+
                 #----- Download original images ----------
                 for index in range(0, 1):
                     print(f'\nDownloading image no {total_images+1}')
@@ -148,35 +167,43 @@ def get_images_data():
                         ('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582')]
                     urllib.request.install_opener(opener)
 
-                    image_id = 158630
-                    urllib.request.urlretrieve(original_size_img, f'{folder}EMD{image_id + (image_name+1)}.jpg')
-                                                                # "image/product_336.jpg"
-                                                                # "image/EMD158630.jpg"
+                    
+                    
+                    
+                    urllib.request.urlretrieve(original_size_img, f'{folder}{name_prefix}{name_suffix}.jpg')
+                                                                # "image/product_336.jpg"   Dry Run By Prashant Kumar
+                                                                # "image/EMD158630.jpg"     Dry Run By Prashant Kumar
 
-                # list to store file lines
-                lines = []
-                # read file
-                with open(r"med_images.txt", 'r') as fp:
-                    # read an store all lines into list
-                    lines = fp.readlines()
+                    # list to store file lines
+                    lines = []
+                    # read file
+                    with open(r"med_images.txt", 'r') as fp:
+                        # read an store all lines into list
+                        lines = fp.readlines()
 
-                # Write file
-                print("Please wait finishing...")
-                with open(r"med_images.txt", 'w') as fp:
-                    # iterate each line
-                    for number, line in enumerate(lines):
-                        # delete line 0. or pass any Nth line you want to remove
-                        # note list index starts from 0
-                        if number not in [0]:
-                            fp.write(line)
-                time.sleep(1)
-                print("\n################################")
-                print("\nCompleted Successfully!",getpass.getuser(),"\n")
-                print("################################\n\n")
+                    # Write file
+                    print("Please wait finishing...")
+                    with open(r"med_images.txt", 'w') as fp:
+                        # iterate each line
+                        for number, line in enumerate(lines):
+                            # delete line 0. or pass any Nth line you want to remove
+                            # note list index starts from 0
+                            if number not in [0]:
+                                fp.write(line)
+                    #time.sleep(1)
+                    print("\n################################")
+                    print("\nCompleted Successfully!",getpass.getuser(),"\n")
+                    print("################################\n")
 
-                # if 5+5 == 10:
-                #     alpha.loop()
-                #     print("True")
+                    print("===================================")
+                    print ("\n",data,"\n")
+                    print("===================================\n\n")
+
+                    # if 5+5 == 10:
+                    #     alpha.loop()
+                    #     print("True")
+                    
+                    
                 
             break
 

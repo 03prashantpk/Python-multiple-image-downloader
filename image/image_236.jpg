@@ -1,0 +1,11 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Access denied. Your IP address is in blacklist.</title>
+</head>
+<body>
+    <div class="page-body" style="font-size: 50px; text-align: center;">
+        Access denied. Your IP address is in blacklist.
+    </div>
+</body>
+</html>

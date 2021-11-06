@@ -1,4 +1,2 @@
-import bs4_original_images
-bs4_original_images.get_images_data()
-
-time.sleep(10)
+import main_script
+main_script.get_images_data()

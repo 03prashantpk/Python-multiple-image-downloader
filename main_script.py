@@ -4,20 +4,19 @@ import re
 import lxml
 import json
 import urllib.request
-import urllib.request
 from bs4 import BeautifulSoup
 import datetime
 import os
 import time
 import getpass
 
+
+x = datetime.datetime.now()
 # open a connection to a URL using urllib
 webUrl  = urllib.request.urlopen('https://www.enally.in/author.txt')
 
-image_url_test  = urllib.request.urlopen('https://www.enally.in/author.txt')
-
 #get the result code and print it
-#print ("result code: " + str(webUrl.getcode()))
+# print ("result code: " + str(webUrl.getcode()))
 
 # read the data from the URL and print it
 data = webUrl.read()
@@ -25,7 +24,6 @@ data = webUrl.read()
 
 
 #----- Global Variable -----#
-x = datetime.datetime.now()
 FOLDER = 'images/'
 totalFiles = 0
 totalDir = 0
@@ -37,38 +35,33 @@ for base, dirs, files in os.walk(FOLDER):
     for Files in files:
         totalFiles += 1
 
-
-#print('Total number of files',totalFiles)
-#print('Total Number of directories',totalDir)
-#print('Total:',(totalDir + totalFiles))
+#---- Code Removed -----#
 
 # open file in read mode (Read total lines)
-with open(r"med_images.txt", 'r') as fp:
+with open(r"listed_file.txt", 'r') as fp:
     for count, line in enumerate(fp):
         pass
 total_to_download = count + 1
 
 total_images = totalDir + totalFiles
 #time.sleep(1)
-print("\nTotal No of Remaining files:",total_to_download - total_images )
+print("\nTotal No of Remaining files:",total_to_download)
 print("Total Number of downloads:", total_images)
 
 
 # Reading Lines from txt files
-myfile = open("med_images.txt", "r")
+myfile = open("listed_file.txt", "r")
 myline = myfile.readline()
-items = myline
+items = myline, "Actress Wallpaper"
 print("\nSearching for: ",items)
 
 
-####---- Image folder and More Naming
+####---- Image folder and More Naming ------###
 folder = "images/"
 count_total_image = total_images # Count total image to increment name by +1
-image_id = 158630  # if want to add number with text
-name_prefix = "EMD"
-name_suffix = image_id + (count_total_image+1)
-
-# Final Name will be {name_prefix + name_suffix}
+image_id = 100 # 158630 if want to add number with text
+name_prefix = "Actress " # EMD
+name_suffix = image_id + (count_total_image+1 )# Final Name will be {name_prefix + name_suffix}
 
 
 start = timer()
@@ -166,42 +159,66 @@ def get_images_data():
                     opener.addheaders = [
                         ('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582')]
                     urllib.request.install_opener(opener)
+                    
+                    error_code = 0
+                    req = urllib.request.Request(original_size_img)
+                    try: urllib.request.urlopen(req)
+                    except urllib.error.URLError as e:
+                        print("\n============================================")
+                        print("   ",e.reason,)
+                        print("\nRename your current item:",myline)
+                        print("============================================")
+
+                        error_code = (len(e.reason))
+                        #print(error_code)
+
+                    if error_code > 0:
+                        error_available = 1
+
+                    elif error_code == 0:
+                        error_available = 0
+
+                    if error_available > 0:
+                        input("\nPress ENTER to skip this item and continue...")
+
+
+                        # list to store file lines
+                        lines = []
+                        # read file
+                        with open(r"listed_file.txt", 'r') as fp:
+                            # read an store all lines into list
+                            lines = fp.readlines()
+
+                        # Write file
+                        print("Please wait finishing...")
+                        with open(r"listed_file.txt", 'w') as fp:
+                            # iterate each line
+                            for number, line in enumerate(lines):
+                                if number not in [0]:
+                                    fp.write(line)
 
                     
-                    
-                    
-                    urllib.request.urlretrieve(original_size_img, f'{folder}{name_prefix}{name_suffix}.jpg')
-                                                                # "image/product_336.jpg"   Dry Run By Prashant Kumar
-                                                                # "image/EMD158630.jpg"     Dry Run By Prashant Kumar
+                    else: 
 
-                    # list to store file lines
-                    lines = []
-                    # read file
-                    with open(r"med_images.txt", 'r') as fp:
-                        # read an store all lines into list
-                        lines = fp.readlines()
+                        urllib.request.urlretrieve(original_size_img, f'{folder}{name_prefix}{name_suffix}.jpg')
+                                                                    # "image/product_336.jpg"   Dry Run By Prashant Kumar
+                                                                    # "image/EMD158630.jpg"     Dry Run By Prashant Kumar
 
-                    # Write file
-                    print("Please wait finishing...")
-                    with open(r"med_images.txt", 'w') as fp:
-                        # iterate each line
-                        for number, line in enumerate(lines):
-                            # delete line 0. or pass any Nth line you want to remove
-                            # note list index starts from 0
-                            if number not in [0]:
-                                fp.write(line)
-                    #time.sleep(1)
-                    print("\n################################")
-                    print("\nCompleted Successfully!",getpass.getuser(),"\n")
-                    print("################################\n")
+                        # list to store file lines
+                        lines = []
+                        # read file
+                        with open(r"listed_file.txt", 'r') as fp:
+                            # read an store all lines into list
+                            lines = fp.readlines()
 
-                    print("===================================")
-                    print ("\n",data,"\n")
-                    print("===================================\n\n")
-
-                    # if 5+5 == 10:
-                    #     alpha.loop()
-                    #     print("True")
+                        # Write file
+                        print("Please wait finishing...")
+                        with open(r"listed_file.txt", 'w') as fp:
+                            # iterate each line
+                            for number, line in enumerate(lines):
+                                # delete line 0. or pass any Nth line you want to remove (note list index starts from 0)
+                                if number not in [0]:
+                                    fp.write(line)
                     
                     
                 
@@ -221,5 +238,8 @@ GitHub Clone Link: git clone https://github.com/03prashantpk/Python-multiple-ima
 
 Created by - Prashant Kumar
 '''
-
+#----- Line 37 -----#
+#print('Total number of files',totalFiles)
+#print('Total Number of directories',totalDir)
+#print('Total:',(totalDir + totalFiles))
 

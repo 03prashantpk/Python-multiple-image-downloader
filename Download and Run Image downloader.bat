@@ -3,15 +3,20 @@ Echo ==========================================
 Echo       Developed by - Prashant Kumar
 Echo ==========================================
 
-pause
-
 @echo off
 git clone https://github.com/03prashantpk/Python-multiple-image-downloader.git
 
-Echo OFF
-Echo Press ENTER to Start Downloading Images...
+Echo =============================================
+Echo   Press ENTER to Start Downloading Images
+Echo =============================================
+
 pause
 
+Echo =============================================
+Echo              Clone Success!
+Echo =============================================
+
 @echo off
-python Python-multiple-image-downloader/main.py %*
-pause
+cd Python-multiple-image-downloader/
+start Run_Image_Downloader.bat
+exit

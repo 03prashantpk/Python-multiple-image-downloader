@@ -9,6 +9,7 @@ import datetime
 import os
 import time
 import getpass
+import sys
 
 
 x = datetime.datetime.now()
@@ -160,7 +161,10 @@ def get_images_data():
                         ('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582')]
                     urllib.request.install_opener(opener)
                     
+                    # Global var error_code will work if link has no use.
                     error_code = 0
+
+                    # Check Url error and skip if link is not secure.
                     req = urllib.request.Request(original_size_img)
                     try: urllib.request.urlopen(req)
                     except urllib.error.URLError as e:
@@ -199,10 +203,8 @@ def get_images_data():
 
                     
                     else: 
-
-                        urllib.request.urlretrieve(original_size_img, f'{folder}{name_prefix}{name_suffix}.jpg')
-                                                                    # "image/product_336.jpg"   Dry Run By Prashant Kumar
-                                                                    # "image/EMD158630.jpg"     Dry Run By Prashant Kumar
+                        # Download Save and Rename
+                        urllib.request.urlretrieve(original_size_img, f'{folder}{name_prefix}{name_suffix}.jpg') 
 
                         # list to store file lines
                         lines = []
@@ -219,9 +221,6 @@ def get_images_data():
                                 # delete line 0. or pass any Nth line you want to remove (note list index starts from 0)
                                 if number not in [0]:
                                     fp.write(line)
-                    
-                    
-                
             break
 
 
@@ -242,4 +241,3 @@ Created by - Prashant Kumar
 #print('Total number of files',totalFiles)
 #print('Total Number of directories',totalDir)
 #print('Total:',(totalDir + totalFiles))
-

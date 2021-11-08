@@ -1,55 +1,15 @@
-'''
-Instruction
-
-Just Run: PS: py main.py
-It will start downloading files and will remain automatically.
-'''
 print("\n")
-download_no_of_images = int(input("Enter No of files you want to download: "))
-print("\n")
-import urllib.request
-webUrl  = urllib.request.urlopen('https://www.enally.in/author.txt')
-credit = webUrl.read()
+print("===============================================")
+print("   Welcome to Python Multi Image Downloader")
+print("==============================================")
 
-#print ("" + str(webUrl.getcode()))
-
-connection_status = (str(webUrl.getcode()))
-if connection_status == "200":
-    print("============================================")
-    print("Connection Established Successfully!")
-    print("============================================")
-else:
-    print("Error Code" + str(webUrl.getcode()))
-
-import getpass
-import main_script
-import schedule
-import time
-import importlib
-
-
-
-#x = datetime.datetime.now()
-
-for i in range(download_no_of_images):
-    schedule.run_pending()
-
-    if i == 0:
-        #importlib.reload(main_script)
-        print(" ")
-    else:
-        importlib.reload(main_script)
-
-    #main script call downloading function
-    main_script.get_images_data()
-
-    if i == download_no_of_images-1:
-        print("\n===========================================================")
-        print("  All Files Downloaded Successfully!",getpass.getuser(),)
-        print (   credit  )
-        print("===========================================================\n")
-
-
-'''
-This Project is developed by https://github.com/03prashantpk
-'''
+print("This is a problem solving project. And, It was developed to complete a task downloading 84,000 images and rename it with ImageID. Now this project can download 10000+ images in one go depending on your resources. ")
+print("Basic functionality are: \n")
+print(" 1. Can read txt file and search image for the given word")
+print(" 2. If the image link is secure it will download the image,")
+print(" 3. Downloaded Image will be renamed automatically before saving.")
+print(" 4. Will deleted the word from txt file. So, that you can keep track of your work.")
+print("\n\n")
+print(input("   # Press ENTER to Continue..."))
+print("Hello")
+#import start_download

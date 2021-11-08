@@ -11,5 +11,4 @@ print(" 3. Downloaded Image will be renamed automatically before saving.")
 print(" 4. Will deleted the word from txt file. So, that you can keep track of your work.")
 print("\n\n")
 print(input("   # Press ENTER to Continue..."))
-print("Hello")
-#import start_download
+import start_download

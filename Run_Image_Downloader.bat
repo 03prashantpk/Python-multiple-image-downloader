@@ -9,3 +9,5 @@ Echo ===================================
 pause
 set mypath=%cd%
 %SystemRoot%\explorer.exe %mypath%\images
+
+exit

@@ -14,14 +14,14 @@ import sys
 
 x = datetime.datetime.now()
 # open a connection to a URL using urllib
-webUrl  = urllib.request.urlopen('https://www.enally.in/author.txt')
+webUrl  = urllib.request.urlopen('https://notes-k20bn.000webhostapp.com/author/author.txt')
 
 #get the result code and print it
-# print ("result code: " + str(webUrl.getcode()))
+#print ("result code: " + str(webUrl.getcode()))
 
 # read the data from the URL and print it
 data = webUrl.read()
-#print (data)
+print (data)
 
 
 #----- Global Variable -----#
@@ -215,12 +215,21 @@ def get_images_data():
 
                         # Write file
                         print("Please wait finishing...")
+                        print(name_prefix,name_suffix)
+                        Successfully_downloaded_files = name_prefix + str(name_suffix) + str("\n")
+                        print("Moving Downloaded files...")
+                        print("Success!")
+                        
                         with open(r"listed_file.txt", 'w') as fp:
                             # iterate each line
                             for number, line in enumerate(lines):
                                 # delete line 0. or pass any Nth line you want to remove (note list index starts from 0)
                                 if number not in [0]:
                                     fp.write(line)
+                        
+                        f = open("downloaded.txt", "a")
+                        f.write(Successfully_downloaded_files)
+                        f.close()
             break
 
 

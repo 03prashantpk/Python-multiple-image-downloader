@@ -22,7 +22,7 @@ def animated_marker():
 print("\n")
 download_no_of_images = int(input("Enter No of files you want to download: "))
 
-webUrl  = urllib.request.urlopen('https://www.enally.in/author.txt')
+webUrl  = urllib.request.urlopen('https://notes-k20bn.000webhostapp.com/author/author.txt')
 credit = webUrl.read()
 
 for x in range(0):
@@ -74,7 +74,7 @@ for i in range(download_no_of_images):
     if i == download_no_of_images-1:
         print("\n===========================================================")
         print("  All Files Downloaded Successfully!",getpass.getuser(),)
-        print (   credit  )
+        #print (   credit  )
         print("===========================================================\n")
 
 

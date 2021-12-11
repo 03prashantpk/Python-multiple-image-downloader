@@ -53,16 +53,18 @@ print("Total Number of downloads:", total_images)
 # Reading Lines from txt files
 myfile = open("listed_file.txt", "r")
 myline = myfile.readline()
-items = myline, "Actress Wallpaper"
+items = myline, "medicine"
 print("\nSearching for: ",items)
+
+downloaded_items_names = myline.rstrip("\n")
 
 
 ####---- Image folder and More Naming ------###
 folder = "images/"
 count_total_image = total_images # Count total image to increment name by +1
-image_id = 100 # 158630 if want to add number with text
-name_prefix = "Actress " # EMD
-name_suffix = image_id + (count_total_image+1 )# Final Name will be {name_prefix + name_suffix}
+image_id = 180905 # 158630 if want to add number with text
+name_prefix = "EMD" # EMD
+name_suffix = image_id+(count_total_image+1 )# Final Name will be {name_prefix + name_suffix}
 
 
 start = timer()
@@ -171,6 +173,7 @@ def get_images_data():
                         print("\n============================================")
                         print("   ",e.reason,)
                         print("\nRename your current item:",myline)
+                        print("Just Put extra 's' at the end of words")
                         print("============================================")
 
                         error_code = (len(e.reason))
@@ -215,8 +218,8 @@ def get_images_data():
 
                         # Write file
                         print("Please wait finishing...")
-                        print(name_prefix,name_suffix)
-                        Successfully_downloaded_files = name_prefix + str(name_suffix) + str("\n")
+                        Successfully_downloaded_files = name_prefix + str(name_suffix) + str(" - ") + str(downloaded_items_names) + str("\n")
+                        print(Successfully_downloaded_files)
                         print("Moving Downloaded files...")
                         print("Success!")
                         

@@ -13,6 +13,8 @@
 ## Brief Introduction:
 This is a problem-solving project. And, It was developed to complete a task downloading 84,000 images and rename it with ImageID. Now this project can download 10000+ images in one go depending on your resources.
 
+# Now it Can download and rename 84K images in 70hrs.
+
 ## Basic functionalities are:  
 1. Can read the txt file and search image for the given word.
 2. If the image link is secure it will download the image.

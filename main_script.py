@@ -10,19 +10,24 @@ import os
 import time
 import getpass
 import sys
+import pygame
 
 
 x = datetime.datetime.now()
 # open a connection to a URL using urllib
-webUrl  = urllib.request.urlopen('https://notes-k20bn.000webhostapp.com/author/author.txt')
+# webUrl  = urllib.request.urlopen('https://notes-k20bn.000webhostapp.com/author/author.txt')
 
-#get the result code and print it
-#print ("result code: " + str(webUrl.getcode()))
+# #get the result code and print it
+# #print ("result code: " + str(webUrl.getcode()))
 
-# read the data from the URL and print it
-data = webUrl.read()
-print (data)
-
+# # read the data from the URL and print it
+# data = webUrl.read()
+# print (data)
+pygame.mixer.init()
+def error():
+    pygame.mixer.music.load("assets/error.mp3")
+    pygame.mixer.music.play(loops=4)
+    #pygame.mixer.set_volume(1.0)
 
 #----- Global Variable -----#
 FOLDER = 'images/'
@@ -53,7 +58,7 @@ print("Total Number of downloads:", total_images)
 # Reading Lines from txt files
 myfile = open("listed_file.txt", "r")
 myline = myfile.readline()
-items = myline, "medicine"
+items = myline, "images"
 print("\nSearching for: ",items)
 
 downloaded_items_names = myline.rstrip("\n")
@@ -62,7 +67,7 @@ downloaded_items_names = myline.rstrip("\n")
 ####---- Image folder and More Naming ------###
 folder = "images/"
 count_total_image = total_images # Count total image to increment name by +1
-image_id = 180905 # 158630 if want to add number with text
+image_id = 218587 # 158630 if want to add number with text
 name_prefix = "EMD" # EMD
 name_suffix = image_id+(count_total_image+1 )# Final Name will be {name_prefix + name_suffix}
 
@@ -89,11 +94,21 @@ def get_images_data():
     #print('\nGoogle Images Metadata:')
     for index in range(0, 1):
         for google_image in soup.select('.isv-r.PNCib.MSM1fd.BUooTd'):
-            title = google_image.select_one(
-                '.VFACy.kGQAp.sMi44c.lNHeqe.WGvvNb')['title']
-            source = google_image.select_one('.fxgdke').text
-            link = google_image.select_one(
-                '.VFACy.kGQAp.sMi44c.lNHeqe.WGvvNb')['href']
+            try:
+                title = google_image.select_one(
+                    '.VFACy.kGQAp.sMi44c.lNHeqe.WGvvNb')['title']
+                source = google_image.select_one('.fxgdke').text
+                link = google_image.select_one(
+                    '.VFACy.kGQAp.sMi44c.lNHeqe.WGvvNb')['href']
+            
+            except:
+                error()
+                print("Error Occurs")
+                print("Close the Program Rename and Restart.")
+                input("Please Press Enter to Close.")
+                time.sleep(5)
+                sys.exit()
+
 
             # print(f'{title}\n{source}\n{link}\n')
 
@@ -178,6 +193,12 @@ def get_images_data():
 
                         error_code = (len(e.reason))
                         #print(error_code)
+                        error()
+                        print("Error Occurs")
+                        print("Close the Program Rename and Restart.")
+                        input("Please Press Enter to Close.")
+                        time.sleep(5)
+                        sys.exit()
 
                     if error_code > 0:
                         error_available = 1

@@ -22,8 +22,8 @@ def animated_marker():
 print("\n")
 download_no_of_images = int(input("Enter No of files you want to download: "))
 
-webUrl  = urllib.request.urlopen('https://notes-k20bn.000webhostapp.com/author/author.txt')
-credit = webUrl.read()
+# webUrl  = urllib.request.urlopen('https://notes-k20bn.000webhostapp.com/author/author.txt')
+# credit = webUrl.read()
 
 for x in range(0):
     if x == 0:
@@ -39,13 +39,13 @@ for x in range(0):
 
 #print ("" + str(webUrl.getcode()))
 
-connection_status = (str(webUrl.getcode()))
-if connection_status == "200":
-    print("============================================")
-    print("   Connection Established Successfully!")
-    print("============================================")
-else:
-    print("Error Code" + str(webUrl.getcode()))
+#connection_status = (str(webUrl.getcode()))
+# if connection_status == "200":
+#     print("============================================")
+#     print("   Connection Established Successfully!")
+#     print("============================================")
+# else:
+#     print("Error Code" + str(webUrl.getcode()))
 
 import main_script
 
@@ -67,6 +67,7 @@ for i in range(download_no_of_images):
 
     
     percenteage = (((i+1) / download_no_of_images) * 100)
+    print("Number Of current loop:",i+1,"/",download_no_of_images)
     print("=======================================================")
     print("             %.0f"%percenteage,"% Completed")
     print("=======================================================")
